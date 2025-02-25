@@ -12,6 +12,8 @@ import ml.pipeline as pipeline
 app = dash.Dash(__name__, 
                 meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}])
 
+server = app.server
+
 # TODO
 #   rewrite in html/css file
 app.index_string = '''
