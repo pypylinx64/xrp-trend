@@ -13,4 +13,4 @@ COPY --chown=user . /app
 
 RUN pip install -e .
 
-CMD ["python", "app.py", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["gunicorn", "app:server", "--workers", "4", "--bind", "0.0.0.0:7860"]
