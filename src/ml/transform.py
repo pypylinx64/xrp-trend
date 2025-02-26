@@ -23,14 +23,16 @@ def split_data(
 
 # TODO
 #   rewrite function (top up)
-def split_df(df):
+def split_df(
+        df, 
+        coef,
+        ):
     
     X = df[[dataflow.COL_OUT_PRICE]].values
     y = df[COL_OUT_NORMAL].values
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15, shuffle=False)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=coef, shuffle=False)
 
     return X_train, X_test, y_train, y_test
-
 
 def logarithmic_scale(
         series,

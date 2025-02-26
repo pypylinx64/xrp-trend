@@ -158,7 +158,11 @@ def fetch_data(api_key):
     time.sleep(1.5)
     
     try:
-        df, accuracy, adfuler = pipeline.prediction_week_crypto(api_key)
+        df, accuracy, adfuler = pipeline.prediction_week_crypto(
+            api_key,
+            ndays=3,
+            size_coef=0.2,
+            )
         return df, accuracy, "success"
 
     except Exception as e:
