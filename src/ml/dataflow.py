@@ -22,12 +22,25 @@ def get_raw(url):
 
     return df
 
+# granul:
+# 1 day = 5 min
+# 2-90 days = 1 hour
+# >90 days = 1 day
 def get_data(
         key,
         days,
+        interval='daily',
         ):
     
-    url = f"https://api.coingecko.com/api/v3/coins/ripple/market_chart?vs_currency=usd&days={days}&precision=full?accept=application/json&x-cg-demo-api-key={key}"
+    url = ''
+
+    if interval == 'granul':
+        url = f"https://api.coingecko.com/api/v3/coins/ripple/market_chart?vs_currency=usd&days={days}&precision=full?accept=application/json&x-cg-demo-api-key={key}"
+    if interval == 'daily':
+        url = f"https://api.coingecko.com/api/v3/coins/ripple/market_chart?vs_currency=usd&days={days}&interval=daily&precision=full?accept=application/json&x-cg-demo-api-ke={key}"
+    if interval == '':
+        url = key
+
     df_raw = get_raw(url)
 
     df_concat = pd.DataFrame()

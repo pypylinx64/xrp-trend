@@ -160,8 +160,9 @@ def fetch_data(api_key):
     try:
         df, accuracy, adfuler = pipeline.prediction_week_crypto(
             api_key,
-            ndays=3,
-            size_coef=0.2,
+            ndays=14,
+            size_coef=0.3,
+            type_interval='daily',
             )
         return df, accuracy, "success"
 

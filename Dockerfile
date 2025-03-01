@@ -11,6 +11,6 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY --chown=user . /app
 
-RUN pip install -e .
+RUN python3 -m pip install -e .
 
 CMD ["gunicorn", "app:server", "--workers", "4", "--bind", "0.0.0.0:7860"]

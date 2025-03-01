@@ -7,19 +7,23 @@ import ml.model as model
 #   rewrite class and evaluation in self.args
 def prediction_week_crypto(
         api_key,
-        ndays=2,
-        size_coef=0.3,
+        type_interval,
+        ndays,
+        size_coef,
         ):
     
     df = dataflow.get_data(
         key=api_key,
         days=ndays,
+        interval=type_interval,
         )
 
     data = dataflow.processing(
         raw_df=df,
         )
     
+    data.to_csv('data/raw_months.csv')
+
     normal_data = transform.logarithmic_scale(
         series=data[dataflow.COL_OUT_PRICE],
         )
@@ -58,6 +62,8 @@ def prediction_week_crypto(
         forecast=data_drop[transform.COL_OUT_PREDICT_DENORMAL],
         actual=data_drop[dataflow.COL_OUT_PRICE],
         )
+    
+    data_drop.to_csv('data/prediction_week.csv')
 
     return data_drop, accuracy, adfuller_stats
 
